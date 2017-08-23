@@ -1,0 +1,6 @@
+{
+    "image": "isotopab/php:7.0-apache",
+    "env": [
+        "SITEPATH=/var/www/html/public"
+    ]
+}
