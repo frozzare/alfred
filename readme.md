@@ -4,7 +4,7 @@
 
 [![Build Status](https://travis-ci.org/frozzare/alfred.svg?branch=master)](https://travis-ci.org/frozzare/alfred) [![Go Report Card](https://goreportcard.com/badge/github.com/frozzare/alfred)](https://goreportcard.com/report/github.com/frozzare/alfred)
 
-Alfred is a development environment for sites and applications using Docker.
+Alfred is a development environment for applications using Docker.
 
 Check out the [examples](https://github.com/frozzare/alfred/tree/master/examples).
 
@@ -48,6 +48,8 @@ If you need some more advanced or running PHP or some other language you need to
 When you ready with your configuration you just run `alfred start` in the same directory as the `alfred.json` exists in, if no config file exists in will use the default configuration which are configured for a HTML site.
 
 ## Configuration
+
+The real configuration used for starting a application container can be view running `alfred config`. This shows the HTML example](https://github.com/frozzare/alfred/tree/master/examples/html) configuration. 
 
 ```json
 {
