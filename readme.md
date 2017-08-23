@@ -8,6 +8,10 @@ Alfred is a development environment for sites and applications using Docker.
 
 Check out the [examples](https://github.com/frozzare/alfred/tree/master/examples).
 
+## Setup
+
+Before using Alfred you have to point all `*.dev` domains to localhost. 
+
 ## Proxy container
 
 Alfred requires a proxy container like [nginx](https://github.com/frozzare/caddy-proxy) or [Caddy](https://github.com/frozzare/caddy-proxy) to proxy domains to the right container.
