@@ -16,8 +16,9 @@ func newCaddyProxy(opts *Options) Proxy {
 
 func (p *caddyProxy) Start() error {
 	err := p.opts.Docker.CreateContainer(&docker.CreateContainerOptions{
-		Name:    "/" + p.opts.Name,
 		Image:   "frozzare/caddy-proxy",
+		Labels:  map[string]string{"alfred": "true"},
+		Name:    "/" + p.opts.Name,
 		Ports:   []string{"80:80"},
 		Volumes: []string{"/var/run/docker.sock:/tmp/docker.sock:ro"},
 	})

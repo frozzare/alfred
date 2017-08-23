@@ -5,6 +5,7 @@ import (
 	_ "github.com/frozzare/alfred/cli/config" // start command
 	_ "github.com/frozzare/alfred/cli/proxy"  // proxy commands
 	_ "github.com/frozzare/alfred/cli/start"  // start command
+	_ "github.com/frozzare/alfred/cli/stop"   // stop command
 	"github.com/frozzare/alfred/log"
 )
 

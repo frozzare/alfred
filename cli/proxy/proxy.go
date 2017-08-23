@@ -3,18 +3,18 @@ package proxy
 import (
 	"gopkg.in/alecthomas/kingpin.v2"
 
-	"github.com/apex/log"
 	"github.com/frozzare/alfred/cli/root"
 	"github.com/frozzare/alfred/docker"
+	"github.com/frozzare/alfred/log"
 	p "github.com/frozzare/alfred/proxy"
 )
 
 func init() {
-	start := root.Command("proxy start", "Start proxy container")
+	cmd := root.Command("proxy", "Proxy container")
 
-	typ := start.Flag("type", "Proxy type (supports: caddy, nginx)").Default("caddy").Short('t').String()
+	typ := cmd.Flag("type", "Proxy type (supports: caddy, nginx)").Default("caddy").Short('t').String()
 
-	start.Action(func(_ *kingpin.ParseContext) error {
+	cmd.Command("start", "Start proxy container").Action(func(_ *kingpin.ParseContext) error {
 		log.Info("Starting proxy container")
 
 		d, err := docker.NewDocker()
@@ -37,9 +37,7 @@ func init() {
 		return nil
 	})
 
-	stop := root.Command("proxy stop", "Stop proxy container")
-
-	stop.Action(func(_ *kingpin.ParseContext) error {
+	cmd.Command("stop", "Stop proxy container").Action(func(_ *kingpin.ParseContext) error {
 		log.Info("Stopping proxy container")
 
 		d, err := docker.NewDocker()

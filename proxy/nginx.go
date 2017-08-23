@@ -16,8 +16,9 @@ func newNginxProxy(opts *Options) Proxy {
 
 func (p *nginxProxy) Start() error {
 	err := p.opts.Docker.CreateContainer(&docker.CreateContainerOptions{
-		Name:    "/" + p.opts.Name,
 		Image:   "jwilder/nginx-proxy",
+		Labels:  map[string]string{"alfred": "true"},
+		Name:    "/" + p.opts.Name,
 		Ports:   []string{"80:80"},
 		Volumes: []string{"/var/run/docker.sock:/tmp/docker.sock:ro"},
 	})

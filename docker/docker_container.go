@@ -16,13 +16,14 @@ import (
 // CreateContainerOptions is the options for creating a container.
 type CreateContainerOptions struct {
 	Env          []string
-	Recreate     bool
+	ExposedPorts []string
 	IP           string
 	Image        string
+	Labels       map[string]string
 	Name         string
+	Recreate     bool
 	Ports        []string
 	Volumes      []string
-	ExposedPorts []string
 }
 
 // createOptions will create container options struct
@@ -56,6 +57,7 @@ func createOptions(opts *CreateContainerOptions) api.CreateContainerOptions {
 			Image:        opts.Image,
 			Volumes:      map[string]struct{}{},
 			ExposedPorts: exposedPorts,
+			Labels:       opts.Labels,
 		},
 		HostConfig: &api.HostConfig{
 			Binds:           []string{},

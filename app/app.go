@@ -32,9 +32,10 @@ func NewApp(opts *Options) App {
 func (a *app) Start() error {
 	err := a.opts.Docker.CreateContainer(&docker.CreateContainerOptions{
 		Env:          a.opts.Config.Env,
-		Name:         "/" + a.opts.Config.Host,
-		Image:        a.opts.Config.Image,
 		ExposedPorts: []string{fmt.Sprintf("%d", a.opts.Config.Port)},
+		Image:        a.opts.Config.Image,
+		Labels:       map[string]string{"alfred": "true"},
+		Name:         "/" + a.opts.Config.Host,
 		Volumes:      []string{a.opts.Config.Path},
 	})
 
