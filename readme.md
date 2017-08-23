@@ -14,7 +14,7 @@ Alfred requires a proxy container like [nginx](https://github.com/frozzare/caddy
 
 The first time you use Alfred to start the proxy container, the type flag is optional to switch proxy container. Default proxy container is [Caddy](https://github.com/frozzare/caddy-proxy).
 
-```
+```sh
 alfred proxy start [--type=nginx]
 ```
 
@@ -24,7 +24,7 @@ You can stop the proxy container with `alfred proxy stop` or delete the Docker c
 
 You're application don't need a configuration file but it's recommended since the default configuration may not work for you're application. If you just have HTML site it's easy. Checkout the [HTML example](https://github.com/frozzare/alfred/tree/master/examples/html).
 
-```
+```json
 {
     "path": "./public"
 }
@@ -32,7 +32,7 @@ You're application don't need a configuration file but it's recommended since th
 
 If you need some more advanced or running PHP or some other language you need to configure which image is used and maybe environment variables.
 
-```
+```json
 {
     "image": "isotopab/php:7.0-apache",
     "env": [
@@ -45,7 +45,7 @@ When you ready with your configuration you just run `alfred start` in the same d
 
 ## Configuration
 
-```
+```json
 {
   "env": [
     "VIRTUAL_HOST=html.dev",
