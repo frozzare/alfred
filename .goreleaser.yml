@@ -1,0 +1,12 @@
+build:
+  main: main.go
+  binary: alfred
+  goos:
+    - darwin
+    - linux
+    - freebsd
+    - netbsd
+    - openbsd
+  goarch:
+    - amd64
+    - 386

@@ -4,6 +4,8 @@
 
 Alfred is a development environment for sites and applications using Docker.
 
+Check out the [examples](https://github.com/frozzare/alfred/tree/master/examples).
+
 ## License
 
 MIT © [Fredrik Forsmo](https://github.com/frozzare)
