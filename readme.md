@@ -14,7 +14,7 @@ Before using Alfred you have to point all `*.dev` domains to localhost.
 
 ## Proxy container
 
-Alfred requires a proxy container like [nginx](https://github.com/frozzare/caddy-proxy) or [Caddy](https://github.com/frozzare/caddy-proxy) to proxy domains to the right container.
+Alfred requires a proxy container like [nginx](https://github.com/jwilder/nginx-proxy) or [Caddy](https://github.com/frozzare/caddy-proxy) to proxy domains to the right container.
 
 The first time you use Alfred to start the proxy container, the type flag is optional to switch proxy container. Default proxy container is [Caddy](https://github.com/frozzare/caddy-proxy).
 
