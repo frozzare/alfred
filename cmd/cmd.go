@@ -5,11 +5,14 @@ import (
 	_ "github.com/frozzare/alfred/cli/config" // start command
 	_ "github.com/frozzare/alfred/cli/proxy"  // proxy commands
 	_ "github.com/frozzare/alfred/cli/start"  // start command
+	"github.com/frozzare/alfred/log"
 )
 
 const version = "master"
 
 // Execute executes the command line.
 func Execute() {
-	app.Run(version)
+	if err := app.Run(version); err != nil {
+		log.Error(err)
+	}
 }

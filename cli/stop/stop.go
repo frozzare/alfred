@@ -1,4 +1,4 @@
-package start
+package stop
 
 import (
 	"gopkg.in/alecthomas/kingpin.v2"
@@ -11,10 +11,10 @@ import (
 )
 
 func init() {
-	cmd := root.Command("start", "Start application container")
+	cmd := root.Command("stop", "Stop application container")
 
 	cmd.Action(func(_ *kingpin.ParseContext) error {
-		log.Info("Starting application container")
+		log.Info("Stopping application container")
 
 		c, err := root.Init()
 		if err != nil {
@@ -31,11 +31,11 @@ func init() {
 			Docker: d,
 		})
 
-		if err := app.Start(); err != nil {
+		if err := app.Stop(); err != nil {
 			return errors.Wrap(err, "Docker")
 		}
 
-		log.Info("Application started at http://%s", c.Host)
+		log.Info("Application container stopped")
 
 		return nil
 	})

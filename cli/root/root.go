@@ -9,9 +9,14 @@ import (
 )
 
 var (
-	Cmd     = kingpin.New("alfred", "")
+	// Cmd is the root command.
+	Cmd = kingpin.New("alfred", "")
+
+	// Command registers a command.
 	Command = Cmd.Command
-	Init    func() (*config.Config, error)
+
+	// Init function.
+	Init func() (*config.Config, error)
 )
 
 func init() {
@@ -24,7 +29,7 @@ func init() {
 			c, err := config.ReadConfig("alfred.json")
 
 			if err != nil {
-				return nil, errors.Wrap(err, "reading config")
+				return nil, errors.Wrap(err, "Reading config")
 			}
 
 			return c, nil

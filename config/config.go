@@ -78,12 +78,12 @@ func ReadConfig(path string) (*Config, error) {
 
 	if !os.IsNotExist(err) {
 		if err := json.Unmarshal(b, c); err != nil {
-			return nil, errors.Wrap(err, "parsing json")
+			return nil, errors.Wrap(err, "Parsing json")
 		}
 	}
 
 	if err := c.Default(); err != nil {
-		return nil, errors.Wrap(err, "default config error")
+		return nil, errors.Wrap(err, "Default config")
 	}
 
 	return c, nil
