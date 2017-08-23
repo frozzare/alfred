@@ -18,6 +18,8 @@ type Options struct {
 // NewProxy creates a new proxy with the given options.
 func NewProxy(opts *Options) Proxy {
 	switch opts.Type {
+	case "nginx":
+		return newNginxProxy(opts)
 	case "caddy":
 		fallthrough
 	default:

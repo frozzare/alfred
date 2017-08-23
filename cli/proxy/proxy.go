@@ -12,7 +12,7 @@ import (
 func init() {
 	start := root.Command("proxy start", "Start proxy container")
 
-	typ := start.Flag("type", "Proxy type (supports: caddy)").Default("caddy").Short('t').String()
+	typ := start.Flag("type", "Proxy type (supports: caddy, nginx)").Default("caddy").Short('t').String()
 
 	start.Action(func(_ *kingpin.ParseContext) error {
 		log.Info("Starting proxy container")
