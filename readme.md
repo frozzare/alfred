@@ -49,7 +49,7 @@ When you ready with your configuration you just run `alfred start` in the same d
 
 ## Configuration
 
-The real configuration used for starting a application container can be view running `alfred config`. This shows the HTML example](https://github.com/frozzare/alfred/tree/master/examples/html) configuration. 
+The real configuration used for starting a application container can be view running `alfred config`. This shows the [HTML example](https://github.com/frozzare/alfred/tree/master/examples/html) configuration. 
 
 ```json
 {
