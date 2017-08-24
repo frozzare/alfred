@@ -10,9 +10,12 @@ go:
  - 1.8
  - tip
 
+before_install:
+  - go get github.com/kardianos/govendor
+
 install:
  - go get github.com/golang/protobuf/{proto,protoc-gen-go}
- - go get -t ./...
+ - govendor fetch +external
 
 script:
  - go test $(go list ./... | grep -v /vendor/)
