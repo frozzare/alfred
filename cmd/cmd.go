@@ -13,10 +13,8 @@ import (
 	"github.com/frozzare/alfred/internal/log"
 )
 
-const version = "master"
-
 // Execute executes the command line.
-func Execute() {
+func Execute(version string) {
 	root.Cmd.Version(version)
 
 	if _, err := root.Cmd.Parse(os.Args[1:]); err != nil {
