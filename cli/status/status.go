@@ -20,6 +20,7 @@ func init() {
 		table.SetHeader([]string{
 			"Host",
 			"Status",
+			"Image",
 			"Start Time",
 		})
 		table.SetAlignment(tablewriter.ALIGN_LEFT)
@@ -45,6 +46,7 @@ func init() {
 			table.Append([]string{
 				strings.Replace(co.Name, "/", "", -1),
 				strings.Title(co.State.StateString()),
+				co.Image,
 				co.State.StartedAt.Format("2006-01-02 15:04:05"),
 			})
 		}

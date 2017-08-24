@@ -126,6 +126,7 @@ func (d *Docker) findContainer(name string) (*api.Container, error) {
 	return nil, nil
 }
 
+// FindContainers list containers based on filters.
 func (d *Docker) FindContainers(filters map[string][]string) ([]*api.Container, error) {
 	containers, err := d.client.ListContainers(api.ListContainersOptions{
 		All:     true,
@@ -143,7 +144,13 @@ func (d *Docker) FindContainers(filters map[string][]string) ([]*api.Container, 
 		if err != nil {
 			return nil, fmt.Errorf("Failed to inspect container %s: %s", container.ID, err)
 		}
-		fmt.Println(d.client.InspectImage(container.Image))
+
+		if image, err := d.client.InspectImage(container.Image); image != nil && err == nil {
+			if len(image.RepoTags) > 0 {
+				container.Image = image.RepoTags[0]
+			}
+		}
+
 		results = append(results, container)
 	}
 
