@@ -1,10 +1,7 @@
 package docker
 
 import (
-	"archive/tar"
-	"bytes"
 	"fmt"
-	"log"
 	"os"
 	"path/filepath"
 	"strings"
@@ -250,44 +247,4 @@ REMOVE:
 	}
 
 	return nil
-}
-
-type File struct {
-	Name string
-	Body string
-}
-
-func (d *Docker) UploadToContainer(name string, files []File) error {
-	buf := new(bytes.Buffer)
-
-	// Create a new tar archive.
-	tw := tar.NewWriter(buf)
-
-	for _, file := range files {
-		hdr := &tar.Header{
-			Name: file.Name,
-			Mode: 0600,
-			Size: int64(len(file.Body)),
-		}
-		if err := tw.WriteHeader(hdr); err != nil {
-			log.Fatalln(err)
-		}
-		if _, err := tw.Write([]byte(file.Body)); err != nil {
-			log.Fatalln(err)
-		}
-	}
-	// Make sure to check the error on Close.
-	if err := tw.Close(); err != nil {
-		log.Fatalln(err)
-	}
-	// End .tar file
-
-	// Start upload .tar
-	uploadOption := api.UploadToContainerOptions{
-		InputStream:          buf,
-		Path:                 "/",
-		NoOverwriteDirNonDir: true,
-	}
-
-	return d.client.UploadToContainer(name, uploadOption)
 }
