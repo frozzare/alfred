@@ -12,6 +12,7 @@ import (
 type App interface {
 	Start() error
 	Stop() error
+	URL() string
 }
 
 // Options represents the application options.
@@ -29,6 +30,7 @@ func NewApp(opts *Options) App {
 	return &app{opts}
 }
 
+// Start application container.
 func (a *app) Start() error {
 	err := a.opts.Docker.CreateContainer(&docker.CreateContainerOptions{
 		Env:          a.opts.Config.Env,
@@ -46,6 +48,12 @@ func (a *app) Start() error {
 	return err
 }
 
+// Stop and remove application container.
 func (a *app) Stop() error {
 	return a.opts.Docker.RemoveContainer(a.opts.Config.Host)
+}
+
+// Get application URL.
+func (a *app) URL() string {
+	return fmt.Sprintf("http://%s", a.opts.Config.Host)
 }

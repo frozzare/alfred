@@ -35,7 +35,7 @@ func init() {
 			return errors.Wrap(err, "Docker")
 		}
 
-		log.Info("Application started at http://%s", c.Host)
+		log.Info("Application started at %s", app.URL())
 
 		return nil
 	})

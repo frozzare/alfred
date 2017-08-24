@@ -45,6 +45,12 @@
 			"revisionTime": "2015-10-22T06:55:26Z"
 		},
 		{
+			"checksumSHA1": "SNSgdp5ShDZ57VZqBkQ0PXJCJIM=",
+			"path": "github.com/atotto/clipboard",
+			"revision": "bb272b845f1112e10117e3e45ce39f690c0001ad",
+			"revisionTime": "2016-02-19T03:44:21Z"
+		},
+		{
 			"checksumSHA1": "spyv5/YFBjYyZLZa1U2LBfDR8PM=",
 			"path": "github.com/beorn7/perks/quantile",
 			"revision": "4c0e84591b9aa9e6dcfdf3e020114cd81f89d5f9",
@@ -657,6 +663,12 @@
 			"revisionTime": "2017-08-18T16:50:27Z"
 		},
 		{
+			"checksumSHA1": "VQ8m0ncYJSbzslI7nVjiAdGEOeQ=",
+			"path": "github.com/pkg/browser",
+			"revision": "c90ca0c84f15f81c982e32665bffd8d7aac8f097",
+			"revisionTime": "2017-05-05T12:59:00Z"
+		},
+		{
 			"checksumSHA1": "rJab1YdNhQooDiBWNnt7TLWPyBU=",
 			"path": "github.com/pkg/errors",
 			"revision": "c605e284fe17294bda444b34710735b29d1a9d90",
@@ -709,6 +721,12 @@
 			"path": "github.com/sirupsen/logrus",
 			"revision": "89742aefa4b206dcf400792f3bd35b542998eb3b",
 			"revisionTime": "2017-08-22T13:27:46Z"
+		},
+		{
+			"checksumSHA1": "JvX6JlFelFnfgrR90z6Mn6GNzJA=",
+			"path": "github.com/tj/go/clipboard",
+			"revision": "8403a29dbcbcdfeed7da1a251c56882923d28bc9",
+			"revisionTime": "2017-08-01T17:15:34Z"
 		},
 		{
 			"checksumSHA1": "oCfh/l3RnxEBL1Sa98CMyWu4FF0=",
