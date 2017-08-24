@@ -1,7 +1,5 @@
 package app
 
-// go:generate moq -out app_moq_test.go . App
-
 import (
 	"fmt"
 
