@@ -23,7 +23,7 @@ func init() {
 
 		d, err := docker.NewDocker()
 		if err != nil {
-			return err
+			return errors.Wrap(err, "Docker")
 		}
 
 		app := app.NewApp(&app.Options{

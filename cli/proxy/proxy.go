@@ -7,6 +7,7 @@ import (
 	"github.com/frozzare/alfred/internal/docker"
 	"github.com/frozzare/alfred/internal/log"
 	p "github.com/frozzare/alfred/proxy"
+	"github.com/pkg/errors"
 )
 
 func init() {
@@ -19,7 +20,7 @@ func init() {
 
 		d, err := docker.NewDocker()
 		if err != nil {
-			return err
+			return errors.Wrap(err, "Docker")
 		}
 
 		proxy := p.NewProxy(&p.Options{
@@ -29,7 +30,7 @@ func init() {
 		})
 
 		if err := proxy.Start(); err != nil {
-			return err
+			return errors.Wrap(err, "Docker")
 		}
 
 		log.Info("Proxy container started")
@@ -42,7 +43,7 @@ func init() {
 
 		d, err := docker.NewDocker()
 		if err != nil {
-			return err
+			return errors.Wrap(err, "Docker")
 		}
 
 		proxy := p.NewProxy(&p.Options{
@@ -52,7 +53,7 @@ func init() {
 		})
 
 		if err := proxy.Stop(); err != nil {
-			return err
+			return errors.Wrap(err, "Docker")
 		}
 
 		log.Info("Proxy container stopped")
