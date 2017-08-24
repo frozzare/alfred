@@ -4,8 +4,8 @@ import (
 	"gopkg.in/alecthomas/kingpin.v2"
 
 	"github.com/frozzare/alfred/cli/root"
-	"github.com/frozzare/alfred/docker"
-	"github.com/frozzare/alfred/log"
+	"github.com/frozzare/alfred/internal/docker"
+	"github.com/frozzare/alfred/internal/log"
 	p "github.com/frozzare/alfred/proxy"
 )
 

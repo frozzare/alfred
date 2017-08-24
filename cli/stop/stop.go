@@ -5,8 +5,8 @@ import (
 
 	"github.com/frozzare/alfred/app"
 	"github.com/frozzare/alfred/cli/root"
-	"github.com/frozzare/alfred/docker"
-	"github.com/frozzare/alfred/log"
+	"github.com/frozzare/alfred/internal/docker"
+	"github.com/frozzare/alfred/internal/log"
 	"github.com/pkg/errors"
 )
 

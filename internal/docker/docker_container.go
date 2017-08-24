@@ -129,6 +129,29 @@ func (d *Docker) findContainer(name string) (*api.Container, error) {
 	return nil, nil
 }
 
+func (d *Docker) FindContainers(filters map[string][]string) ([]*api.Container, error) {
+	containers, err := d.client.ListContainers(api.ListContainersOptions{
+		All:     true,
+		Filters: filters,
+	})
+
+	if err != nil {
+		return nil, err
+	}
+
+	results := []*api.Container{}
+
+	for _, container := range containers {
+		container, err := d.client.InspectContainer(container.ID)
+		if err != nil {
+			return nil, fmt.Errorf("Failed to inspect container %s: %s", container.ID, err)
+		}
+		results = append(results, container)
+	}
+
+	return results, nil
+}
+
 // CreateContainer will create a container with the given options.
 func (d *Docker) CreateContainer(opts *CreateContainerOptions) error {
 	// Check if image exists or pull it.
