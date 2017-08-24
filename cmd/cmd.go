@@ -1,9 +1,11 @@
 package cmd
 
 import (
-	"github.com/frozzare/alfred/cli/app"
-	_ "github.com/frozzare/alfred/cli/config" // start command
-	_ "github.com/frozzare/alfred/cli/proxy"  // proxy commands
+	"os"
+
+	_ "github.com/frozzare/alfred/cli/config" // config command
+	_ "github.com/frozzare/alfred/cli/proxy"  // proxy command
+	"github.com/frozzare/alfred/cli/root"
 	_ "github.com/frozzare/alfred/cli/start"  // start command
 	_ "github.com/frozzare/alfred/cli/status" // status command
 	_ "github.com/frozzare/alfred/cli/stop"   // stop command
@@ -15,7 +17,9 @@ const version = "master"
 
 // Execute executes the command line.
 func Execute() {
-	if err := app.Run(version); err != nil {
+	root.Cmd.Version(version)
+
+	if _, err := root.Cmd.Parse(os.Args[1:]); err != nil {
 		log.Error(err)
 	}
 }
