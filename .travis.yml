@@ -11,7 +11,7 @@ go:
   - tip
 
 install:
-  - echo "go"
+  - go get github.com/frozzare/go-assert
 
 script:
   - go test $(go list ./... | grep -v /vendor/)
