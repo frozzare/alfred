@@ -37,6 +37,7 @@ func (a *app) Start() error {
 		ExposedPorts: []string{fmt.Sprintf("%d", a.opts.Config.Port)},
 		Image:        a.opts.Config.Image,
 		Labels:       map[string]string{"alfred": "true"},
+		Links:        a.opts.Config.Links,
 		Name:         "/" + a.opts.Config.Host,
 		Volumes:      []string{a.opts.Config.Path},
 	})

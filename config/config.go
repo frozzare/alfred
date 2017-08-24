@@ -17,6 +17,7 @@ type Config struct {
 	Env   []string `json:"env"`
 	Image string   `json:"image"`
 	Host  string   `json:"host"`
+	Links []string `json:"links"`
 	Port  int      `json:"port"`
 	Path  string   `json:"path"`
 }

@@ -17,6 +17,7 @@ type CreateContainerOptions struct {
 	IP           string
 	Image        string
 	Labels       map[string]string
+	Links        []string
 	Name         string
 	Recreate     bool
 	Ports        []string
@@ -61,6 +62,7 @@ func createOptions(opts *CreateContainerOptions) api.CreateContainerOptions {
 			PublishAllPorts: false,
 			PortBindings:    publishedPorts,
 			RestartPolicy:   api.AlwaysRestart(),
+			Links:           opts.Links,
 		},
 	}
 
