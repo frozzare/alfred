@@ -10,6 +10,8 @@ go:
  - 1.8
  - tip
 
-script:
+install:
  - go get github.com/frozzare/go-assert
+
+script:
  - go test -race $(go list ./... | grep -v /vendor/)
