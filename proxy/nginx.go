@@ -1,8 +1,6 @@
 package proxy
 
 import (
-	"strings"
-
 	"github.com/frozzare/alfred/internal/docker"
 )
 
@@ -15,19 +13,13 @@ func newNginxProxy(opts *Options) Proxy {
 }
 
 func (p *nginxProxy) Start() error {
-	err := p.opts.Docker.CreateContainer(&docker.CreateContainerOptions{
+	return p.opts.Docker.CreateContainer(&docker.CreateContainerOptions{
 		Image:   "jwilder/nginx-proxy",
 		Labels:  map[string]string{"alfred": "true"},
 		Name:    "/" + p.opts.Name,
 		Ports:   []string{"80:80"},
 		Volumes: []string{"/var/run/docker.sock:/tmp/docker.sock:ro"},
 	})
-
-	if err != nil && strings.Contains(err.Error(), "container already exists") {
-		return nil
-	}
-
-	return err
 }
 
 func (p *nginxProxy) Stop() error {

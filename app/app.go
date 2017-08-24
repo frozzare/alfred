@@ -1,8 +1,9 @@
 package app
 
+// go:generate moq -out app_moq_test.go . App
+
 import (
 	"fmt"
-	"strings"
 
 	"github.com/frozzare/alfred/config"
 	"github.com/frozzare/alfred/internal/docker"
@@ -32,7 +33,7 @@ func NewApp(opts *Options) App {
 
 // Start application container.
 func (a *app) Start() error {
-	err := a.opts.Docker.CreateContainer(&docker.CreateContainerOptions{
+	return a.opts.Docker.CreateContainer(&docker.CreateContainerOptions{
 		Env:          a.opts.Config.Env,
 		ExposedPorts: []string{fmt.Sprintf("%d", a.opts.Config.Port)},
 		Image:        a.opts.Config.Image,
@@ -41,12 +42,6 @@ func (a *app) Start() error {
 		Name:         "/" + a.opts.Config.Host,
 		Volumes:      []string{a.opts.Config.Path},
 	})
-
-	if err != nil && strings.Contains(err.Error(), "container already exists") {
-		return nil
-	}
-
-	return err
 }
 
 // Stop and remove application container.

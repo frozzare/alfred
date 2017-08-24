@@ -1,6 +1,8 @@
 package proxy
 
 import (
+	"strings"
+
 	"gopkg.in/alecthomas/kingpin.v2"
 
 	"github.com/frozzare/alfred/cli/root"
@@ -30,6 +32,10 @@ func init() {
 		})
 
 		if err := proxy.Start(); err != nil {
+			if strings.Contains(err.Error(), "container already exists") {
+				return errors.New("Proxy container already exists")
+			}
+
 			return errors.Wrap(err, "Docker")
 		}
 

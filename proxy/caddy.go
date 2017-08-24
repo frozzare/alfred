@@ -1,8 +1,6 @@
 package proxy
 
 import (
-	"strings"
-
 	"github.com/frozzare/alfred/internal/docker"
 )
 
@@ -15,19 +13,13 @@ func newCaddyProxy(opts *Options) Proxy {
 }
 
 func (p *caddyProxy) Start() error {
-	err := p.opts.Docker.CreateContainer(&docker.CreateContainerOptions{
+	return p.opts.Docker.CreateContainer(&docker.CreateContainerOptions{
 		Image:   "frozzare/caddy-proxy",
 		Labels:  map[string]string{"alfred": "true"},
 		Name:    "/" + p.opts.Name,
 		Ports:   []string{"80:80"},
 		Volumes: []string{"/var/run/docker.sock:/tmp/docker.sock:ro"},
 	})
-
-	if err != nil && strings.Contains(err.Error(), "container already exists") {
-		return nil
-	}
-
-	return err
 }
 
 func (p *caddyProxy) Stop() error {

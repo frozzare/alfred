@@ -1,6 +1,8 @@
 package start
 
 import (
+	"strings"
+
 	"gopkg.in/alecthomas/kingpin.v2"
 
 	"github.com/frozzare/alfred/app"
@@ -32,6 +34,10 @@ func init() {
 		})
 
 		if err := app.Start(); err != nil {
+			if strings.Contains(err.Error(), "container already exists") {
+				return errors.New("Application container already exists")
+			}
+
 			return errors.Wrap(err, "Docker")
 		}
 
