@@ -18,6 +18,8 @@ Alfred requires a proxy container like [nginx](https://github.com/jwilder/nginx-
 
 The first time you use Alfred to start the proxy container, the type flag is optional to switch proxy container. Default proxy container is [Caddy](https://github.com/frozzare/caddy-proxy).
 
+The proxy containers will only bind port 80 and not 443 (yey, pull request?).
+
 ```sh
 alfred proxy start [--type=nginx]
 ```
