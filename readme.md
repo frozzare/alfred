@@ -4,7 +4,7 @@
 
 [![Build Status](https://travis-ci.org/frozzare/alfred.svg?branch=master)](https://travis-ci.org/frozzare/alfred) [![Go Report Card](https://goreportcard.com/badge/github.com/frozzare/alfred)](https://goreportcard.com/report/github.com/frozzare/alfred)
 
-Alfred is a development environment for applications using Docker.
+Alfred is a development environment for applications using Docker. It's not a replacement for [Docker Compose](https://docs.docker.com/compose/).
 
 Check out the [examples](https://github.com/frozzare/alfred/tree/master/examples).
 
@@ -59,6 +59,7 @@ The real configuration used for starting a application container can be view run
   ],
   "image": "joshix/caddy",
   "host": "html.dev",
+  "links": [],
   "port": 2015,
   "path": "/u/go/src/github.com/frozzare/alfred/examples/html/public:/var/www/html:ro"
 }
