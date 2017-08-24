@@ -20,13 +20,14 @@ var (
 )
 
 func init() {
-	workdir := Cmd.Flag("chdir", "Change working directory.").Default(".").Short('C').String()
+	workdir := Cmd.Flag("wd", "Change working directory.").Default(".").Short('W').String()
+	path := Cmd.Flag("config", "Path to config file.").Default("alfred.json").Short('C').String()
 
 	Cmd.PreAction(func(ctx *kingpin.ParseContext) error {
 		os.Chdir(*workdir)
 
 		Init = func() (*config.Config, error) {
-			c, err := config.ReadConfig("alfred.json")
+			c, err := config.ReadConfig(*path)
 
 			if err != nil {
 				return nil, errors.Wrap(err, "Reading config")
