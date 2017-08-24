@@ -1,15 +1,10 @@
 package docker
 
 import (
-	"errors"
 	"os"
 	"runtime"
 
 	api "github.com/fsouza/go-dockerclient"
-)
-
-var (
-	ErrLocalMachine = errors.New("running on local machine, no need to sync application files")
 )
 
 // Docker represents a docker client.
