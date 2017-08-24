@@ -1,7 +1,5 @@
 ## Introduction
 
-> Work In Progress!
-
 [![Build Status](https://travis-ci.org/frozzare/alfred.svg?branch=master)](https://travis-ci.org/frozzare/alfred) [![Go Report Card](https://goreportcard.com/badge/github.com/frozzare/alfred)](https://goreportcard.com/report/github.com/frozzare/alfred)
 
 Alfred is a development environment for applications using Docker. It's not a replacement for [Docker Compose](https://docs.docker.com/compose/).
