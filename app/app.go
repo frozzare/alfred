@@ -5,7 +5,7 @@ import (
 	"strings"
 
 	"github.com/frozzare/alfred/config"
-	"github.com/frozzare/alfred/docker"
+	"github.com/frozzare/alfred/internal/docker"
 )
 
 // App interface represents the application.

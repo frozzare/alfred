@@ -1,6 +1,6 @@
 package proxy
 
-import "github.com/frozzare/alfred/docker"
+import "github.com/frozzare/alfred/internal/docker"
 
 // Proxy interface represents the application.
 type Proxy interface {

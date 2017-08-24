@@ -3,7 +3,7 @@ package proxy
 import (
 	"strings"
 
-	"github.com/frozzare/alfred/docker"
+	"github.com/frozzare/alfred/internal/docker"
 )
 
 type caddyProxy struct {

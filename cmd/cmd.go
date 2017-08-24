@@ -7,7 +7,7 @@ import (
 	_ "github.com/frozzare/alfred/cli/start"  // start command
 	_ "github.com/frozzare/alfred/cli/status" // status command
 	_ "github.com/frozzare/alfred/cli/stop"   // stop command
-	"github.com/frozzare/alfred/log"
+	"github.com/frozzare/alfred/internal/log"
 )
 
 const version = "master"

@@ -143,6 +143,7 @@ func (d *Docker) FindContainers(filters map[string][]string) ([]*api.Container, 
 		if err != nil {
 			return nil, fmt.Errorf("Failed to inspect container %s: %s", container.ID, err)
 		}
+		fmt.Println(d.client.InspectImage(container.Image))
 		results = append(results, container)
 	}
 
