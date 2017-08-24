@@ -4,9 +4,6 @@ build:
   goos:
     - darwin
     - linux
-    - freebsd
-    - netbsd
-    - openbsd
   goarch:
     - amd64
     - 386
