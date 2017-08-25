@@ -38,7 +38,7 @@ func (a *app) Start() error {
 		Labels:       map[string]string{"alfred": "true"},
 		Links:        a.opts.Config.Links,
 		Name:         "/" + a.opts.Config.Host,
-		Volumes:      []string{a.opts.Config.Path},
+		Volumes:      append([]string{a.opts.Config.Path}, a.opts.Config.Files...),
 	})
 }
 

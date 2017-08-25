@@ -3,10 +3,12 @@ package config
 import (
 	"encoding/json"
 	"fmt"
+	"index/suffixarray"
 	"io/ioutil"
 	"log"
 	"os"
 	"path/filepath"
+	"regexp"
 	"strings"
 
 	"github.com/pkg/errors"
@@ -23,13 +25,13 @@ type GlobalConfig struct {
 
 // Config represents application configuration.
 type Config struct {
-	Env     []string `json:"env"`
-	Volumes []string `json:"files"`
-	Image   string   `json:"image"`
-	Host    string   `json:"host"`
-	Links   []string `json:"links"`
-	Port    int      `json:"port"`
-	Path    string   `json:"path"`
+	Env   []string `json:"env"`
+	Files []string `json:"files"`
+	Image string   `json:"image"`
+	Host  string   `json:"host"`
+	Links []string `json:"links"`
+	Port  int      `json:"port"`
+	Path  string   `json:"path"`
 }
 
 // Default sets the default config.
@@ -55,12 +57,22 @@ func (c *Config) Default() error {
 		c.Port = 2015
 	}
 
-	if !strings.Contains(c.Path, ":") {
-		c.Path = c.Path + ":/var/www/html:ro"
+	r := regexp.MustCompile("\\:")
+	index := suffixarray.New([]byte(c.Path))
+	result := index.FindAllIndex(r, -1)
+
+	if len(result) == 0 {
+		c.Path = c.Path + ":/var/www/html:rw"
+	} else if len(result) == 1 {
+		c.Path = c.Path + ":rw"
 	}
 
 	c.Env = append(c.Env, "VIRTUAL_HOST="+c.Host)
 	c.Env = append(c.Env, fmt.Sprintf("VIRTUAL_PORT=%d", c.Port))
+
+	if len(c.Links) == 0 {
+		c.Links = []string{}
+	}
 
 	return nil
 }
