@@ -12,6 +12,10 @@ import (
 	"github.com/pkg/errors"
 )
 
+var (
+	global *Global
+)
+
 // Global represents global configuration.
 type Global struct {
 	DockerHost string `json:"docker_host"`
@@ -19,13 +23,13 @@ type Global struct {
 
 // Config represents application configuration.
 type Config struct {
-	global *Global
-	Env    []string `json:"env"`
-	Image  string   `json:"image"`
-	Host   string   `json:"host"`
-	Links  []string `json:"links"`
-	Port   int      `json:"port"`
-	Path   string   `json:"path"`
+	Env     []string `json:"env"`
+	Volumes []string `json:"files"`
+	Image   string   `json:"image"`
+	Host    string   `json:"host"`
+	Links   []string `json:"links"`
+	Port    int      `json:"port"`
+	Path    string   `json:"path"`
 }
 
 // Default sets the default config.
@@ -98,10 +102,10 @@ func ReadConfig(path string) (*Config, error) {
 
 // SetGlobal sets the global config.
 func (c *Config) SetGlobal(g *Global) {
-	c.global = g
+	global = g
 }
 
 // Global returns the global config.
 func (c *Config) Global() *Global {
-	return c.global
+	return global
 }
