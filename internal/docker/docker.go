@@ -25,7 +25,7 @@ func NewDocker(args ...*Config) (*Docker, error) {
 	var host string
 
 	// Find docker host for local machine.
-	if len(args) > 0 {
+	if len(args) > 0 && len(args[0].Host) > 0 {
 		host = args[0].Host
 	} else if os.Getenv("DOCKER_HOST") != "" {
 		host = os.Getenv("DOCKER_HOST")
