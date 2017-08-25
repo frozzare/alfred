@@ -2,13 +2,15 @@
 
 [![Build Status](https://travis-ci.org/frozzare/alfred.svg?branch=master)](https://travis-ci.org/frozzare/alfred) [![Go Report Card](https://goreportcard.com/badge/github.com/frozzare/alfred)](https://goreportcard.com/report/github.com/frozzare/alfred)
 
-Alfred is a development environment for applications using Docker. It's not a replacement for [Docker Compose](https://docs.docker.com/compose/).
+Alfred is a development environment for applications using Docker. It's not a replacement for [Docker Compose](https://docs.docker.com/compose/) but a simpler way to use docker when you develop sites or applications for customers.
+
+No windows support (yet, pull request?).
 
 Check out the [examples](https://github.com/frozzare/alfred/tree/master/examples).
 
 ## Setup
 
-Before using Alfred you have to point all `*.dev` domains to localhost. 
+Before using Alfred you have to point all `*.dev` domains to localhost.
 
 ## Proxy container
 
