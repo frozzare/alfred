@@ -74,6 +74,12 @@ func (c *Config) Default() error {
 		c.Links = []string{}
 	}
 
+	for i, f := range c.Files {
+		if !strings.HasPrefix(f, "/") && !strings.HasPrefix(f, "./") {
+			c.Files[i] = "./" + f
+		}
+	}
+
 	return nil
 }
 
