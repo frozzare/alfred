@@ -22,6 +22,7 @@ var (
 func init() {
 	workdir := Cmd.Flag("wd", "Change working directory.").Default(".").Short('W').String()
 	path := Cmd.Flag("config", "Path to config file.").Default("alfred.json").Short('C').String()
+	host := Cmd.Flag("host", "Docker host.").Default().Short('h').String()
 
 	Cmd.PreAction(func(ctx *kingpin.ParseContext) error {
 		os.Chdir(*workdir)
@@ -32,6 +33,10 @@ func init() {
 			if err != nil {
 				return nil, errors.Wrap(err, "Reading config")
 			}
+
+			c.SetGlobal(&config.Global{
+				DockerHost: *host,
+			})
 
 			return c, nil
 		}

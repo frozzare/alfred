@@ -21,7 +21,9 @@ func init() {
 			return err
 		}
 
-		d, err := docker.NewDocker()
+		d, err := docker.NewDocker(&docker.Config{
+			Host: c.Global().DockerHost,
+		})
 		if err != nil {
 			return errors.Wrap(err, "Docker")
 		}

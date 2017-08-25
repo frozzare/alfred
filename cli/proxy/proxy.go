@@ -20,7 +20,14 @@ func init() {
 	cmd.Command("start", "Start proxy container").Action(func(_ *kingpin.ParseContext) error {
 		log.Info("Starting proxy container")
 
-		d, err := docker.NewDocker()
+		c, err := root.Init()
+		if err != nil {
+			return err
+		}
+
+		d, err := docker.NewDocker(&docker.Config{
+			Host: c.Global().DockerHost,
+		})
 		if err != nil {
 			return errors.Wrap(err, "Docker")
 		}
@@ -47,7 +54,14 @@ func init() {
 	cmd.Command("stop", "Stop proxy container").Action(func(_ *kingpin.ParseContext) error {
 		log.Info("Stopping proxy container")
 
-		d, err := docker.NewDocker()
+		c, err := root.Init()
+		if err != nil {
+			return err
+		}
+
+		d, err := docker.NewDocker(&docker.Config{
+			Host: c.Global().DockerHost,
+		})
 		if err != nil {
 			return errors.Wrap(err, "Docker")
 		}

@@ -25,12 +25,14 @@ func init() {
 		})
 		table.SetAlignment(tablewriter.ALIGN_LEFT)
 
-		_, err := root.Init()
+		c, err := root.Init()
 		if err != nil {
 			return err
 		}
 
-		d, err := docker.NewDocker()
+		d, err := docker.NewDocker(&docker.Config{
+			Host: c.Global().DockerHost,
+		})
 		if err != nil {
 			return errors.Wrap(err, "Docker")
 		}

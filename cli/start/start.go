@@ -15,7 +15,7 @@ import (
 func init() {
 	cmd := root.Command("start", "Start application container")
 
-	cmd.Action(func(_ *kingpin.ParseContext) error {
+	cmd.Action(func(p *kingpin.ParseContext) error {
 		log.Info("Starting application container")
 
 		c, err := root.Init()
@@ -23,7 +23,9 @@ func init() {
 			return err
 		}
 
-		d, err := docker.NewDocker()
+		d, err := docker.NewDocker(&docker.Config{
+			Host: c.Global().DockerHost,
+		})
 		if err != nil {
 			return errors.Wrap(err, "Docker")
 		}

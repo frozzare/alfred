@@ -12,14 +12,20 @@ import (
 	"github.com/pkg/errors"
 )
 
-// Config struct for alfred applications.
+// Global represents global configuration.
+type Global struct {
+	DockerHost string `json:"docker_host"`
+}
+
+// Config represents application configuration.
 type Config struct {
-	Env   []string `json:"env"`
-	Image string   `json:"image"`
-	Host  string   `json:"host"`
-	Links []string `json:"links"`
-	Port  int      `json:"port"`
-	Path  string   `json:"path"`
+	global *Global
+	Env    []string `json:"env"`
+	Image  string   `json:"image"`
+	Host   string   `json:"host"`
+	Links  []string `json:"links"`
+	Port   int      `json:"port"`
+	Path   string   `json:"path"`
 }
 
 // Default sets the default config.
@@ -88,4 +94,14 @@ func ReadConfig(path string) (*Config, error) {
 	}
 
 	return c, nil
+}
+
+// SetGlobal sets the global config.
+func (c *Config) SetGlobal(g *Global) {
+	c.global = g
+}
+
+// Global returns the global config.
+func (c *Config) Global() *Global {
+	return c.global
 }
