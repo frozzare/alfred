@@ -5,6 +5,7 @@ import (
 
 	"github.com/frozzare/alfred/app"
 	"github.com/frozzare/alfred/cli/root"
+	"github.com/frozzare/alfred/config"
 	"github.com/frozzare/alfred/internal/docker"
 	"github.com/frozzare/alfred/internal/log"
 	"github.com/pkg/errors"
@@ -22,7 +23,7 @@ func init() {
 		}
 
 		d, err := docker.NewDocker(&docker.Config{
-			Host: c.Global().DockerHost,
+			Host: config.Global().DockerHost,
 		})
 		if err != nil {
 			return errors.Wrap(err, "Docker")

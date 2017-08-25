@@ -27,16 +27,16 @@ func init() {
 	Cmd.PreAction(func(ctx *kingpin.ParseContext) error {
 		os.Chdir(*workdir)
 
+		config.SetGlobal(&config.GlobalConfig{
+			DockerHost: *host,
+		})
+
 		Init = func() (*config.Config, error) {
 			c, err := config.ReadConfig(*path)
 
 			if err != nil {
 				return nil, errors.Wrap(err, "Reading config")
 			}
-
-			c.SetGlobal(&config.Global{
-				DockerHost: *host,
-			})
 
 			return c, nil
 		}

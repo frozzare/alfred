@@ -13,11 +13,11 @@ import (
 )
 
 var (
-	global *Global
+	globalConfig *GlobalConfig
 )
 
-// Global represents global configuration.
-type Global struct {
+// GlobalConfig represents global configuration.
+type GlobalConfig struct {
 	DockerHost string `json:"docker_host"`
 }
 
@@ -101,11 +101,11 @@ func ReadConfig(path string) (*Config, error) {
 }
 
 // SetGlobal sets the global config.
-func (c *Config) SetGlobal(g *Global) {
-	global = g
+func SetGlobal(g *GlobalConfig) {
+	globalConfig = g
 }
 
 // Global returns the global config.
-func (c *Config) Global() *Global {
-	return global
+func Global() *GlobalConfig {
+	return globalConfig
 }
