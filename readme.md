@@ -70,7 +70,7 @@ The real configuration used for starting a application container can be view run
 
 All values can be modified with `alfred.json`. The host value is based on your folder if no config value exists.
 
-### Specific configuration information.
+### Specific configuration documentation.
 
 * `files` array should contain file paths both local and host, e.g `./test.php:/var/www/html/public`, note that Alfred mountes the application volume as read write so files will be written to host system. So gitignore or something like that is recommended to ignore those files.
 * `host` string is based on your folder if no config value exists, can contain tld.
