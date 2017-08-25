@@ -28,7 +28,9 @@ func init() {
 		os.Chdir(*workdir)
 
 		config.SetGlobal(&config.GlobalConfig{
-			DockerHost: *host,
+			Docker: &config.Docker{
+				Host: *host,
+			},
 		})
 
 		Init = func() (*config.Config, error) {

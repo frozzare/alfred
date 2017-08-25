@@ -22,7 +22,7 @@ func init() {
 		log.Info("Starting proxy container")
 
 		d, err := docker.NewDocker(&docker.Config{
-			Host: config.Global().DockerHost,
+			Host: config.Global().Docker.Host,
 		})
 		if err != nil {
 			return errors.Wrap(err, "Docker")

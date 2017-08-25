@@ -5,23 +5,12 @@ import (
 	"fmt"
 	"index/suffixarray"
 	"io/ioutil"
-	"log"
 	"os"
-	"path/filepath"
 	"regexp"
 	"strings"
 
 	"github.com/pkg/errors"
 )
-
-var (
-	globalConfig *GlobalConfig
-)
-
-// GlobalConfig represents global configuration.
-type GlobalConfig struct {
-	DockerHost string `json:"docker_host"`
-}
 
 // Config represents application configuration.
 type Config struct {
@@ -49,7 +38,7 @@ func (c *Config) Default() error {
 		}
 
 		parts := strings.Split(path, "/")
-		c.Host = fmt.Sprintf("%s.dev", parts[len(parts)-1])
+		c.Host = fmt.Sprintf("%s.%s", parts[len(parts)-1], globalConfig.TLD)
 	}
 
 	// Set default image, works for HTML.
@@ -92,23 +81,6 @@ func (c *Config) Default() error {
 	return nil
 }
 
-func path(p string) string {
-	if strings.HasPrefix(p, "/") {
-		return p
-	}
-
-	path, err := os.Getwd()
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	if strings.HasPrefix(p, "./") {
-		p = strings.Replace(p, "./", "", -1)
-	}
-
-	return filepath.Join(path, p)
-}
-
 // ReadConfig tries to reads the given path or create a default config.
 func ReadConfig(path string) (*Config, error) {
 	c := &Config{}
@@ -125,14 +97,4 @@ func ReadConfig(path string) (*Config, error) {
 	}
 
 	return c, nil
-}
-
-// SetGlobal sets the global config.
-func SetGlobal(g *GlobalConfig) {
-	globalConfig = g
-}
-
-// Global returns the global config.
-func Global() *GlobalConfig {
-	return globalConfig
 }
