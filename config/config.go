@@ -38,7 +38,7 @@ func (c *Config) Default() error {
 		}
 
 		parts := strings.Split(path, "/")
-		c.Host = fmt.Sprintf("%s.%s", parts[len(parts)-1], globalConfig.TLD)
+		c.Host = fmt.Sprintf("%s.%s", parts[len(parts)-1], Global().TLD)
 	}
 
 	// Set default image, works for HTML.

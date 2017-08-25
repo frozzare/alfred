@@ -1,5 +1,15 @@
 package config
 
+import (
+	"encoding/json"
+	"io/ioutil"
+	"os"
+	"path/filepath"
+
+	homedir "github.com/mitchellh/go-homedir"
+	"github.com/pkg/errors"
+)
+
 var (
 	globalConfig *GlobalConfig
 )
@@ -28,6 +38,29 @@ func (g *GlobalConfig) Default() {
 	}
 }
 
+// ReadGlobalConfig tries to reads the global config.
+func ReadGlobalConfig() (*GlobalConfig, error) {
+	g := &GlobalConfig{}
+	h, err := homedir.Dir()
+
+	if err != nil {
+		return nil, err
+	}
+
+	path := filepath.Join(h, ".alfred.json")
+	b, err := ioutil.ReadFile(path)
+
+	if !os.IsNotExist(err) {
+		if err := json.Unmarshal(b, g); err != nil {
+			return nil, errors.Wrap(err, "Parsing json")
+		}
+	}
+
+	g.Default()
+
+	return g, nil
+}
+
 // SetGlobal sets the global config.
 func SetGlobal(g *GlobalConfig) {
 	if g == nil {
@@ -35,11 +68,15 @@ func SetGlobal(g *GlobalConfig) {
 	}
 
 	globalConfig = g
-	globalConfig.Default()
 }
 
 // Global returns the global config.
 func Global() *GlobalConfig {
+	if globalConfig == nil {
+		globalConfig = &GlobalConfig{}
+		globalConfig.Default()
+	}
+
 	return globalConfig
 }
 

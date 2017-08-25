@@ -33,6 +33,17 @@ func init() {
 			},
 		})
 
+		g, err := config.ReadGlobalConfig()
+		if err != nil {
+			return err
+		}
+
+		if len(*host) > 0 {
+			g.Docker.Host = *host
+		}
+
+		config.SetGlobal(g)
+
 		Init = func() (*config.Config, error) {
 			c, err := config.ReadConfig(*path)
 
