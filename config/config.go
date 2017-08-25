@@ -36,10 +36,12 @@ type Config struct {
 
 // Default sets the default config.
 func (c *Config) Default() error {
+	// Set default port.
 	if c.Port == 0 {
 		c.Port = 80
 	}
 
+	// Set host based on folder.
 	if c.Host == "" {
 		path, err := os.Getwd()
 		if err != nil {
@@ -50,33 +52,40 @@ func (c *Config) Default() error {
 		c.Host = fmt.Sprintf("%s.dev", parts[len(parts)-1])
 	}
 
-	c.Path = path(c.Path)
-
+	// Set default image, works for HTML.
 	if c.Image == "" {
 		c.Image = "joshix/caddy"
 		c.Port = 2015
 	}
 
+	// Add missing parts to path.
+	c.Path = path(c.Path)
+
+	// Count number of ":" char in path.
 	r := regexp.MustCompile("\\:")
 	index := suffixarray.New([]byte(c.Path))
 	result := index.FindAllIndex(r, -1)
 
+	// Add missing parts to application path.
 	if len(result) == 0 {
 		c.Path = c.Path + ":/var/www/html:rw"
 	} else if len(result) == 1 {
 		c.Path = c.Path + ":rw"
 	}
 
+	// Set virtual host and virtual port default values.
 	c.Env = append(c.Env, "VIRTUAL_HOST="+c.Host)
 	c.Env = append(c.Env, fmt.Sprintf("VIRTUAL_PORT=%d", c.Port))
 
+	// Set empty slice as default value for links.
 	if len(c.Links) == 0 {
 		c.Links = []string{}
 	}
 
+	// Fix paths for files.
 	for i, f := range c.Files {
 		if !strings.HasPrefix(f, "/") && !strings.HasPrefix(f, "./") {
-			c.Files[i] = "./" + f
+			c.Files[i] = path(f)
 		}
 	}
 
