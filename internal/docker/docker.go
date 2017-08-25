@@ -52,27 +52,6 @@ func (d *Docker) Host() string {
 	return d.host
 }
 
-// Prune removes all unused containers, volumes, networks and images (both dangling and unreferenced).
-func (d *Docker) Prune() error {
-	if _, err := d.client.PruneContainers(api.PruneContainersOptions{}); err != nil {
-		return err
-	}
-
-	if _, err := d.client.PruneImages(api.PruneImagesOptions{}); err != nil {
-		return err
-	}
-
-	if _, err := d.client.PruneVolumes(api.PruneVolumesOptions{}); err != nil {
-		return err
-	}
-
-	if _, err := d.client.PruneNetworks(api.PruneNetworksOptions{}); err != nil {
-		return err
-	}
-
-	return nil
-}
-
 // RemoveContainer removes a container by name.
 func (d *Docker) RemoveContainer(name string) error {
 	container, err := d.findContainer(name)
