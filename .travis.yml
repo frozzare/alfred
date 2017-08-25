@@ -6,12 +6,10 @@ services:
   - docker
 
 go:
-  - 1.8
   - 1.9
-  - tip
 
 install:
   - go get github.com/frozzare/go-assert
 
 script:
-  - go test $(go list ./... | grep -v /vendor/)
+  - go test ./...
