@@ -7,6 +7,7 @@ import (
 	"gopkg.in/alecthomas/kingpin.v2"
 
 	"github.com/frozzare/alfred/cli/root"
+	"github.com/frozzare/alfred/config"
 	"github.com/frozzare/alfred/internal/docker"
 	"github.com/olekukonko/tablewriter"
 	"github.com/pkg/errors"
@@ -25,13 +26,8 @@ func init() {
 		})
 		table.SetAlignment(tablewriter.ALIGN_LEFT)
 
-		c, err := root.Init()
-		if err != nil {
-			return err
-		}
-
 		d, err := docker.NewDocker(&docker.Config{
-			Host: c.Global().DockerHost,
+			Host: config.Global().DockerHost,
 		})
 		if err != nil {
 			return errors.Wrap(err, "Docker")
