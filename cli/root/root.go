@@ -22,24 +22,13 @@ var (
 func init() {
 	workdir := Cmd.Flag("wd", "Change working directory.").Default(".").Short('W').String()
 	path := Cmd.Flag("config", "Path to config file.").Default("alfred.json").Short('C').String()
-	host := Cmd.Flag("host", "Docker host.").Default().Short('h').String()
 
 	Cmd.PreAction(func(ctx *kingpin.ParseContext) error {
 		os.Chdir(*workdir)
 
-		config.SetGlobal(&config.GlobalConfig{
-			Docker: &config.Docker{
-				Host: *host,
-			},
-		})
-
 		g, err := config.ReadGlobalConfig()
 		if err != nil {
 			return err
-		}
-
-		if len(*host) > 0 {
-			g.Docker.Host = *host
 		}
 
 		config.SetGlobal(g)
