@@ -39,15 +39,22 @@ func (g *GlobalConfig) Default() {
 }
 
 // ReadGlobalConfig tries to reads the global config.
-func ReadGlobalConfig() error {
+func ReadGlobalConfig(args ...string) error {
 	g := &GlobalConfig{}
-	h, err := homedir.Dir()
+	var path string
 
-	if err != nil {
-		return err
+	if len(args) > 0 && len(args[0]) > 0 {
+		path = args[0]
+	} else {
+		h, err := homedir.Dir()
+
+		if err != nil {
+			return err
+		}
+
+		path = filepath.Join(h, ".alfred.json")
 	}
 
-	path := filepath.Join(h, ".alfred.json")
 	b, err := ioutil.ReadFile(path)
 
 	if !os.IsNotExist(err) {
