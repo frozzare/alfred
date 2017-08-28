@@ -39,12 +39,12 @@ func (g *GlobalConfig) Default() {
 }
 
 // ReadGlobalConfig tries to reads the global config.
-func ReadGlobalConfig() (*GlobalConfig, error) {
+func ReadGlobalConfig() error {
 	g := &GlobalConfig{}
 	h, err := homedir.Dir()
 
 	if err != nil {
-		return nil, err
+		return err
 	}
 
 	path := filepath.Join(h, ".alfred.json")
@@ -52,22 +52,15 @@ func ReadGlobalConfig() (*GlobalConfig, error) {
 
 	if !os.IsNotExist(err) {
 		if err := json.Unmarshal(b, g); err != nil {
-			return nil, errors.Wrap(err, "Parsing json")
+			return errors.Wrap(err, "Parsing json")
 		}
 	}
 
 	g.Default()
 
-	return g, nil
-}
-
-// SetGlobal sets the global config.
-func SetGlobal(g *GlobalConfig) {
-	if g == nil {
-		return
-	}
-
 	globalConfig = g
+
+	return nil
 }
 
 // Global returns the global config.

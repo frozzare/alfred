@@ -26,12 +26,9 @@ func init() {
 	Cmd.PreAction(func(ctx *kingpin.ParseContext) error {
 		os.Chdir(*workdir)
 
-		g, err := config.ReadGlobalConfig()
-		if err != nil {
+		if err := config.ReadGlobalConfig(); err != nil {
 			return err
 		}
-
-		config.SetGlobal(g)
 
 		Init = func() (*config.Config, error) {
 			c, err := config.ReadConfig(*path)
