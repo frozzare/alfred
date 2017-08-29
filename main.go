@@ -2,7 +2,7 @@ package main
 
 import "github.com/frozzare/alfred/cmd"
 
-var version = "v0.3.0"
+var version = "master"
 
 func main() {
 	cmd.Execute(version)
