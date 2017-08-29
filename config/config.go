@@ -15,7 +15,6 @@ import (
 // Config represents application configuration.
 type Config struct {
 	Env   []string `json:"env"`
-	Files []string `json:"files"`
 	Image string   `json:"image"`
 	Host  string   `json:"host"`
 	Links []string `json:"links"`
@@ -69,13 +68,6 @@ func (c *Config) Default() error {
 	// Set empty slice as default value for links.
 	if len(c.Links) == 0 {
 		c.Links = []string{}
-	}
-
-	// Fix paths for files.
-	for i, f := range c.Files {
-		if !strings.HasPrefix(f, "/") && !strings.HasPrefix(f, "./") {
-			c.Files[i] = path(f)
-		}
 	}
 
 	return nil
