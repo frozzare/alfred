@@ -10,7 +10,7 @@ Check out the [examples](https://github.com/frozzare/alfred/tree/master/examples
 
 ## Setup
 
-Before using Alfred you have to point all `*.dev` domains to localhost.
+Before using Alfred you have to point all `*.test` domains to localhost.
 
 ## Proxy container
 
@@ -56,11 +56,11 @@ The real configuration used for starting a application container can be view run
 ```json
 {
   "env": [
-    "VIRTUAL_HOST=html.dev",
+    "VIRTUAL_HOST=html.test",
     "VIRTUAL_PORT=2015"
   ],
   "image": "joshix/caddy",
-  "host": "html.dev",
+  "host": "html.test",
   "links": [],
   "port": 2015,
   "path": "/u/go/src/github.com/frozzare/alfred/examples/html/public:/var/www/html:ro"
