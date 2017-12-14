@@ -20,6 +20,6 @@ func TestApp(t *testing.T) {
 	})
 
 	assert.Nil(t, proxy.Start())
-	assert.True(t, strings.Contains(proxy.Start().Error(), "container already exists"))
+	assert.True(t, strings.Contains(proxy.Start().Error(), "API error (400)"))
 	assert.Nil(t, proxy.Stop())
 }

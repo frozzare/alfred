@@ -170,7 +170,7 @@ CREATE:
 
 	if err != nil {
 		// Try to destroy the container if it exists and should be recreated.
-		if strings.Contains(err.Error(), "container already exists") && opts.Recreate {
+		if strings.Contains(err.Error(), "API error (400)") && opts.Recreate {
 			container, err := d.findContainer(opts.Name)
 			if err != nil {
 				return err

@@ -27,6 +27,6 @@ func TestApp(t *testing.T) {
 	})
 
 	assert.Nil(t, app.Start())
-	assert.True(t, strings.Contains(app.Start().Error(), "container already exists"))
+	assert.True(t, strings.Contains(app.Start().Error(), "API error (400)"))
 	assert.Nil(t, app.Stop())
 }
