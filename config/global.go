@@ -24,7 +24,7 @@ type GlobalConfig struct {
 // Default sets the default global config.
 func (g *GlobalConfig) Default() {
 	if len(g.TLD) == 0 {
-		g.TLD = "dev"
+		g.TLD = "test"
 	}
 
 	if g.Docker == nil {
