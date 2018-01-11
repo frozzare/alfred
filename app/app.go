@@ -50,7 +50,7 @@ func (a *app) Stop() error {
 
 // Get application URL.
 func (a *app) URL() string {
-	hosts := append([]string{a.opts.Config.Host}, a.opts.Config.Domains...)
+	hosts := a.opts.Config.Hosts()
 
 	for i, host := range hosts {
 		hosts[i] = fmt.Sprintf("http://%s", host)

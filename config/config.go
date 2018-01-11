@@ -63,8 +63,7 @@ func (c *Config) Default() error {
 	}
 
 	// Set virtual host and virtual port default values.
-	hosts := append([]string{c.Host}, c.Domains...)
-	c.Env = append(c.Env, "VIRTUAL_HOST="+strings.Join(hosts, ","))
+	c.Env = append(c.Env, "VIRTUAL_HOST="+strings.Join(c.Hosts(), ","))
 	c.Env = append(c.Env, fmt.Sprintf("VIRTUAL_PORT=%d", c.Port))
 
 	// Set empty slice as default value for links.
@@ -73,6 +72,17 @@ func (c *Config) Default() error {
 	}
 
 	return nil
+}
+
+// Hosts returns all hosts that the application container should use.
+func (c *Config) Hosts() []string {
+	hosts := []string{c.Host}
+	for _, host := range c.Domains {
+		if c.Host != host {
+			hosts = append(hosts, host)
+		}
+	}
+	return hosts
 }
 
 // ReadConfig tries to reads the given path or create a default config.
