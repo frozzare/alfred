@@ -14,12 +14,13 @@ import (
 
 // Config represents application configuration.
 type Config struct {
-	Env   []string `json:"env"`
-	Image string   `json:"image"`
-	Host  string   `json:"host"`
-	Links []string `json:"links"`
-	Port  int      `json:"port"`
-	Path  string   `json:"path"`
+	Env     []string `json:"env"`
+	Image   string   `json:"image"`
+	Host    string   `json:"host"`
+	Domains []string `json:"domains"`
+	Links   []string `json:"links"`
+	Port    int      `json:"port"`
+	Path    string   `json:"path"`
 }
 
 // Default sets the default config.
@@ -62,7 +63,8 @@ func (c *Config) Default() error {
 	}
 
 	// Set virtual host and virtual port default values.
-	c.Env = append(c.Env, "VIRTUAL_HOST="+c.Host)
+	hosts := append([]string{c.Host}, c.Domains...)
+	c.Env = append(c.Env, "VIRTUAL_HOST="+strings.Join(hosts, ","))
 	c.Env = append(c.Env, fmt.Sprintf("VIRTUAL_PORT=%d", c.Port))
 
 	// Set empty slice as default value for links.

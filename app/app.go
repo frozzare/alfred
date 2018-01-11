@@ -2,6 +2,7 @@ package app
 
 import (
 	"fmt"
+	"strings"
 
 	"github.com/frozzare/alfred/config"
 	"github.com/frozzare/alfred/internal/docker"
@@ -49,5 +50,11 @@ func (a *app) Stop() error {
 
 // Get application URL.
 func (a *app) URL() string {
-	return fmt.Sprintf("http://%s", a.opts.Config.Host)
+	hosts := append([]string{a.opts.Config.Host}, a.opts.Config.Domains...)
+
+	for i, host := range hosts {
+		hosts[i] = fmt.Sprintf("http://%s", host)
+	}
+
+	return strings.Join(hosts, ", ")
 }

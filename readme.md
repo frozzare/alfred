@@ -59,6 +59,7 @@ The real configuration used for starting a application container can be view run
     "VIRTUAL_HOST=html.test",
     "VIRTUAL_PORT=2015"
   ],
+  "domains": [],
   "image": "joshix/caddy",
   "host": "html.test",
   "links": [],
@@ -73,6 +74,7 @@ All values can be modified with `alfred.json`. The host value is based on your f
 
 * `host` string is based on your folder if no config value exists, can contain tld.
 * `links` array should contain container names, e.g `redis` or `redis3:redis`
+* `domains` array should contain any extra domains that should be configured with the application container.
 
 ## License
 
