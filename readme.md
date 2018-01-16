@@ -73,7 +73,7 @@ All values can be modified with `alfred.json`. The host value is based on your f
 ### Specific configuration documentation.
 
 * `host` string is based on your folder if no config value exists, can contain tld.
-* `links` array should contain container names, e.g `redis` or `redis:3-alpine`
+* `links` array should contain container names, e.g `redis`
 * `domains` array should contain any extra domains that should be configured with the application container.
 
 ## License
